@@ -1219,14 +1219,14 @@ $N > 1 && 1 == grep $' % $_ < 1, $N =~ // .. sqrt $N
 ---
 check if $N is prime O(sqrt N)
 ***
-$A eq $B
+$A ~~ $B
 ---
 check if string $A equals string $B
 iii
 ccc
 $A = "32";
 $B = "32\n";
-print $A eq $B ? "yes" : "no"
+print $A ~~ $B ? "yes" : "no"
 ooo
 no
 ***

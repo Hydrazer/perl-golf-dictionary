@@ -100,7 +100,6 @@ h4, input {
 
 .dropdown {
   display: none;
-  
 }
 
 .show {
@@ -116,26 +115,42 @@ table {
   border-collapse: collapse;
 }
 
-.tr-example {
-  border-bottom: 1px solid red;
+.tr-example:not(:first-child) {
+  border-top: 1px solid red;
 }
 
-.tr-example:nth-last-child(1) {
-   border-bottom: none;
-}
+.snippet,
+.snippet-input,
+.snippet-output {
+  width: 50vw;
+  margin-left: 3vw;
+  margin-top: 0.5vh;
+  margin-bottom: 0.5vh;
 
-.snippet {
-  margin-top: 1vh;
-  margin-right: 0.4vh;
-  margin-left: 0.4vh;
-  margin-bottom: 1h;
-  padding: 0.4vh 0.4vh 0.4vh 0.4vh;
   text-align: left;
   font-weight: normal;
   display: inline-block;
   white-space: pre-wrap;
-  vertical-align:top;
+  vertical-align: top;
+  word-wrap: break-word;
+  color: #ffffff;
+}
+
+.snippet {
+  padding-top: 0.5vw;
+  padding-bottom: 0.5vw;
+
+  background-color: #000000;
+}
+
+.snippet-input {
+  width: 35vw;
   background-color: #333333;
+}
+
+.snippet-output {
+  width: 35vw;
+  background-color: #000000;
 }
 
 .cm-header {color: blue;}
