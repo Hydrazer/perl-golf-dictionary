@@ -1,20 +1,9 @@
 "use strict";
 
-const READER = new XMLHttpRequest() || new ActiveXObject("MSXML2.XMLHTTP");
 let QUERY = null;
 let CODE_ARR = null;
 
-file_read("perl_query.pl");
-
-async function file_read(file) {
-  READER.open("get", file, true); 
-  READER.onreadystatechange = () => {
-    if (READER.readyState == 4) {
-      QUERY = READER.responseText; 
-    }
-  };
-  READER.send(null);
-}
+const get_query = fetch("./perl_query.pl").then(r => r.text())
 
 async function code_arr_text(code_arr) {
   // Parses code_arr into displayable html
@@ -141,17 +130,9 @@ function toggle_search() {
   }
 }
 
-async function file_wait() {
-  let FILE_READ_LOOP = setInterval(function() {
-    if (QUERY === null) return;
-
-    clearInterval(FILE_READ_LOOP);
-    file_parse();
-  }, 10);
-}
-
-$(document).ready(() => {
-  file_wait();
+$(document).ready(async () => {
+  QUERY = await get_query
+  file_parse()
 
   $("#QUERY").on("keyup", (e) => {
     console.log("huh");

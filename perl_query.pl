@@ -1,3 +1,142 @@
+grep !$H{$_}++, @A
+---
+unique items in list ($$_ might work if non number)
+***
+~~<> while $n++ < $.
+---
+iterate over all lines while inc $n and preserve $_
+***
+/a++a/
+---
+posessive boi (no backtracking)
+iii
+ccc
+$_ = "aaaaaa";
+print 0 + /a++a/
+ooo
+0
+***
+$S | $" x $N
+---
+right pad / left justify $S with length $N
+iii
+ccc
+$S = "123";
+print $S | $" x 4 . 5
+ooo
+123 5
+***
+$S & "\x7f" x $N
+---
+substr $S, 0, $N (use actual char)
+***
+$S =~ s/(.)(.)/${$2 > $1}/ge
+---
+string filter with compare / regex match via regex group
+***
+$S =~ /a/ > $S =~ /b/
+---
+check if $S match /a/ but not /b/ (can chain w/ >= < etc)
+***
+/ / ? grep $&, @A : 0
+---
+anti parenthesis ternary separator
+iii
+3
+3 5
+2 1
+5 7
+ccc
+$, = $";
+@A = 1..<>;
+print / / ? map $_ * $` - $', @A : 0, $/ for <>
+# / /,print map($_*$`-$',@A),$/for<>
+# print/ /?map$_*$`-$',@A:0,$/for<>
+ooo
+-2 1 4 
+1 3 5 
+-2 3 8
+***
+//
+---
+use previous regex pattern if it matched
+iii
+01:01:01
+ccc
+<> =~ /..:(..):(..)/;
+(gmtime 86400 - ($& * 3600 + $1 * 60 + $2)) =~ //;
+print $&
+ooo
+22:58:59
+***
+sprintf "%05s", $S
+---
+left pad / right justify with zeros
+***
+sprintf "%-5s", $S
+---
+right pad / left justify with spaces
+***
+sprintf "%5s", $S
+---
+left pad / right justify with spaces
+***
+sprintf '%2$d %1$d', 1, 2
+---
+use nth argument multiple times in format string (single quote)
+iii
+ccc
+printf '%2$d %1$d', 1, 2
+ooo
+2 1
+iii
+1
+500
+ccc
+printf '%d: %08b %2$x', <>
+ooo
+1: 111110100 1f4
+***
+sprintf "%*vd", $P, $S
+---
+make a v string from $S separated by $P
+iii
+ccc
+printf "%*v08b", $", "abc" 
+ooo
+01100001 01100010 01100011
+***
+use bigint;
+$A->bnok($B)
+---
+$A choose $B (binomial coefficient / combinations)
+***
+use bigint;
+1->blcm(@A)
+---
+LCM (least common multiple) of list @A
+***
+use bigint;
+0->bgcd(@A)
+---
+GCD (greatest common denominator) of list @A
+***
+$S =~ s/(.)(?=.*\1)//g
+---
+unique chars of string $S (by last occurence)
+***
+s/./$& x $` !~ $&/ge
+---
+unique chars of string $S (maintain order) (regex chars will break)
+***
+s/./$& x ~$` !~ ~$&/ge
+---
+unique chars of string $S (maintain order)
+***
+%H = $S =~ /(.)()/sg
+---
+unique chars of string $S (only useful for printing)
+***
 s//-/
 ---
 short $_ assignment / prepend for non bareword string
@@ -674,7 +813,7 @@ date time stuff
 #!perl -lp
 push @B, $_} for (@B) {
 ---
-eskimo greeting to print newline seperated array (-l sets $/ to "\n")
+eskimo greeting to print newline seperated list (-l sets $/ to "\n")
 ***
 ~~($S =~ s/bruh .//g)
 ---
@@ -1723,6 +1862,10 @@ match non alphabetic character
 ---
 match alphabetic character
 ***
+sprintf "%0*d", 1 + 5, $S
+---
+format $S with expression length padding
+***
 sprintf "%0$^d", $S
 ---
 format $S with variable $^ length padding
@@ -1874,7 +2017,7 @@ ooo
 ***
 []
 ---
-list reference (nested list)
+array / list reference (nested list)
 iii
 ccc
 $A = [1];
@@ -2063,7 +2206,7 @@ ccc
 use Data::Dumper;
 
 @A = qw(a b c);
-print Dumper \@A # array reference
+print Dumper \@A # list reference
 ooo
 $VAR1 = [
           'a',
@@ -3204,9 +3347,9 @@ glob <>
 ---
 split line of input on \s+ and remove empty values (won't work if any `}{*~` present)
 ***
-use Math'BigInt bgcd;
+use bigint;
 $n = <>;
-print bgcd($n)->bfac
+print bfac {$n*1}
 ---
 print the factorial of $n as a bigint
 ***
